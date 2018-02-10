@@ -1,2 +1,1 @@
 # XYR
-# Please wait
