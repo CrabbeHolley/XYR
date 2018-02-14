@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets, QtWebEngineWidgets
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -28,8 +28,10 @@ class Ui_Form(object):
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.verticalLayout.addWidget(self.label_5)
-        self.mapWidget = QtWidgets.QWidget(Form)
+        self.mapWidget = QtWebEngineWidgets.QWebEngineView(Form)
         self.mapWidget.setObjectName("mapWidget")
+        url = 'file:///C:/Users/庞博/IdeaProjects/XYR/map.html'
+        self.mapWidget.setUrl(QtCore.QUrl(url))
         self.verticalLayout.addWidget(self.mapWidget)
         self.widget_2 = QtWidgets.QWidget(Form)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -60,6 +62,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.backButton)
 
         self.retranslateUi(Form)
+        self.backButton.clicked.connect(self.back)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
