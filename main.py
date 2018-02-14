@@ -14,10 +14,12 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def action_in(self):
         self.addSuspectAction = jubaoWidget()
         self.addSuspectAction.show()
-        print(selected)
     def suspect_in(self):
         self.addSuspect = suspectWidget()
         self.addSuspect.show()
+    def combobox_change(self):
+        global selected
+        selected = names[self.comboBox.currentIndex()][0]
 
 class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
     def __init__(self):
