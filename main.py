@@ -4,7 +4,7 @@ from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
-from PyQt5 import QtWidgets,QtCore;
+from PyQt5 import QtWidgets;
 
 class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
