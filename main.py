@@ -43,6 +43,16 @@ class mapWidget(QtWidgets.QWidget,Ui_Map):
     def __init__(self):
         super(mapWidget,self).__init__()
         self.setupUi(self)
+        global selected
+        db_map = pymysql.connect("localhost","root","crab1996","suspect",0,None,"utf8")
+        cursor = db_map.cursor()
+        sql = "select * from suspect_position where PID = %s" % (selected)
+        cursor.execute(sql)
+        suspectNow = cursor.fetchone()
+        self.label_2.setText(str(suspectNow[2]))
+        self.label_4.setText(str(suspectNow[3]))
+        db_map.commit()
+        db_map.close()
     def back(self):
         self.close()
 
@@ -51,10 +61,12 @@ db = pymysql.connect("localhost","root","crab1996","suspect",0,None,"utf8")
 cursor = db.cursor()
 cursor.execute("select * from suspect_position")
 names = cursor.fetchall()
+db.commit()
+db.close()
 
 selected = "0001"
+
 app = QtWidgets.QApplication(sys.argv)
 window = mywindow()
 window.show()
-db.close()
 sys.exit(app.exec_())

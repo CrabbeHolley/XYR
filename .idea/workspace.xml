@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3552af83-6337-418c-a080-2c18547be959" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/map.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XYR.py" afterPath="$PROJECT_DIR$/XYR.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/map.py" afterPath="$PROJECT_DIR$/map.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/XYR$main.coverage" NAME="main Coverage Results" MODIFIED="1518596594140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/XYR$main.coverage" NAME="main Coverage Results" MODIFIED="1518659038793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -34,8 +31,8 @@
       <file leaf-file-name="jubao.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/jubao.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1058">
-              <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+            <state relative-caret-position="115">
+              <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -51,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="map.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
+            <state relative-caret-position="736">
               <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
               <folding />
             </state>
@@ -71,14 +68,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="46" column="20" lean-forward="true" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+            <state relative-caret-position="414">
+              <caret line="54" column="22" lean-forward="true" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1518594652015" expanded="true" signature="1500:1530" ph="select * fro... suspect_position" />
+                <marker date="1518659038747" expanded="true" signature="1504:1547" ph="select * fro... suspect_position" />
+                <marker date="1518659038747" expanded="true" signature="1932:1962" ph="select * fro... suspect_position" />
               </folding>
             </state>
           </provider>
@@ -104,9 +102,9 @@
         <option value="$PROJECT_DIR$/jubao.py" />
         <option value="$PROJECT_DIR$/suspect.py" />
         <option value="$PROJECT_DIR$/XYR.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/map.html" />
         <option value="$PROJECT_DIR$/map.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -411,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518594077229</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="map add">
+      <created>1518596639911</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1518596639911</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -428,7 +433,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39978093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -450,10 +455,13 @@
     <MESSAGE value="框架一半达成" />
     <MESSAGE value="嫌疑人选择（完成一半）" />
     <MESSAGE value="map界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="map界面" />
+    <MESSAGE value="map add" />
+    <option name="LAST_COMMIT_MESSAGE" value="map add" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="8" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -487,7 +495,8 @@
           <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1518594652015" expanded="true" signature="1500:1530" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1504:1547" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1932:1962" ph="select * fro... suspect_position" />
           </folding>
         </state>
       </provider>
@@ -522,7 +531,8 @@
           <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1518594652015" expanded="true" signature="1500:1530" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1504:1547" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1932:1962" ph="select * fro... suspect_position" />
           </folding>
         </state>
       </provider>
@@ -557,7 +567,8 @@
           <caret line="17" column="46" lean-forward="false" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1518594652015" expanded="true" signature="1500:1530" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1504:1547" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1932:1962" ph="select * fro... suspect_position" />
           </folding>
         </state>
       </provider>
@@ -592,7 +603,8 @@
           <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1518594652015" expanded="true" signature="1500:1530" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1504:1547" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1932:1962" ph="select * fro... suspect_position" />
           </folding>
         </state>
       </provider>
@@ -620,30 +632,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jubao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
-          <caret line="46" column="50" lean-forward="false" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/XYR.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="85" column="58" lean-forward="true" selection-start-line="85" selection-start-column="58" selection-end-line="85" selection-end-column="58" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="46" column="20" lean-forward="true" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1518594652015" expanded="true" signature="1500:1530" ph="select * fro... suspect_position" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -663,11 +656,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/jubao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="20" column="41" lean-forward="true" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python35/Lib/site-packages/pymysql/cursors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
+        <state relative-caret-position="736">
           <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python35/Lib/site-packages/pymysql/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="1074" column="0" lean-forward="false" selection-start-line="1074" selection-start-column="0" selection-end-line="1074" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="54" column="22" lean-forward="true" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1518659038747" expanded="true" signature="1504:1547" ph="select * fro... suspect_position" />
+            <marker date="1518659038747" expanded="true" signature="1932:1962" ph="select * fro... suspect_position" />
+          </folding>
         </state>
       </provider>
     </entry>
