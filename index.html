@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,8 +14,6 @@
 <body>
 	<div id="allmap"></div>
 	<form id="r-result" action="/map" method="post" style="display: none">
-		经度: <input id="longitude" name="longitude" type="text" style="width:100px; margin-right:10px;" value="{{noun1}}" />
-		纬度: <input id="latitude" name="latitude" type="text" style="width:100px; margin-right:10px;" value="{{noun2}}" />
 		<input type="submit" value="查询"/>
 	</form>
 </body>
@@ -24,11 +23,5 @@
 	var map = new BMap.Map("allmap");
 	map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
 	map.enableScrollWheelZoom(true);
-    if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
-        map.clearOverlays();
-        var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
-        var marker = new BMap.Marker(new_point);  // 创建标注
-        map.addOverlay(marker);              // 将标注添加到地图中
-        map.panTo(new_point);
-    }
+	document.getElementById('r-result').submit();
 </script>

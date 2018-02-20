@@ -30,7 +30,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.label_5)
         self.mapWidget = QtWebEngineWidgets.QWebEngineView(Form)
         self.mapWidget.setObjectName("mapWidget")
-        url = 'file:///C:/Users/庞博/IdeaProjects/XYR/map.html'
+        url = 'http://localhost:8000/'
         self.mapWidget.setUrl(QtCore.QUrl(url))
         self.verticalLayout.addWidget(self.mapWidget)
         self.widget_2 = QtWidgets.QWidget(Form)
