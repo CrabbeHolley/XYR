@@ -27,13 +27,18 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.findMap = mapWidget()
         self.findMap.show()
     def combobox_change(self):
-        global selected
+        global selected,index
+        index = self.comboBox.currentIndex()
         selected = names[self.comboBox.currentIndex()][0]
 
 class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
     def __init__(self):
         super(jubaoWidget,self).__init__()
         self.setupUi(self)
+        for row in names:
+            self.suspect.addItem(row[1])
+        global index
+        self.suspect.setCurrentIndex(index)
     def back(self):
         self.close()
 
@@ -98,6 +103,7 @@ if __name__ == '__main__':
     db.close()
 
     selected = "0001"
+    index = 0
     longitude = 0.0
     latitude = 0.0
 
