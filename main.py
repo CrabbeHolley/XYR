@@ -41,6 +41,12 @@ class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
         self.suspect.setCurrentIndex(index)
     def back(self):
         self.close()
+    def anonymous(self):
+        if self.radioButton.isChecked():
+            self.Rname.clear()
+            self.Rname.setEnabled(False)
+        else:
+            self.Rname.setEnabled(True)
 
 class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
     def __init__(self):
