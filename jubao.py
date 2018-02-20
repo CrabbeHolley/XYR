@@ -46,6 +46,8 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         self.backButton.clicked.connect(self.back)
         self.radioButton.toggled.connect(self.anonymous)
+        self.sureButton.clicked.connect(self.addEvidence)
+        self.suspect.currentIndexChanged.connect(self.changeSuspect)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

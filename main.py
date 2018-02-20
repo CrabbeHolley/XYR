@@ -6,7 +6,7 @@ from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
-from PyQt5 import QtWidgets;
+from PyQt5 import QtWidgets,QtCore,QtGui;
 from tornado.options import define, options;
 
 define("port", default=8000, help="run on the given port", type=int)
@@ -27,9 +27,8 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.findMap = mapWidget()
         self.findMap.show()
     def combobox_change(self):
-        global selected,index
+        global index
         index = self.comboBox.currentIndex()
-        selected = names[self.comboBox.currentIndex()][0]
 
 class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
     def __init__(self):
@@ -37,8 +36,9 @@ class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
         self.setupUi(self)
         for row in names:
             self.suspect.addItem(row[1])
-        global index
+        global index,jubaoIndex
         self.suspect.setCurrentIndex(index)
+        jubaoIndex = index
     def back(self):
         self.close()
     def anonymous(self):
@@ -47,6 +47,24 @@ class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
             self.Rname.setEnabled(False)
         else:
             self.Rname.setEnabled(True)
+    def changeSuspect(self):
+        global jubaoIndex
+        jubaoIndex = self.suspect.currentIndex()
+    def addEvidence(self):
+        db_jubao = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
+        cursor = db_jubao.cursor()
+        Rname = self.Rname.text()
+        if self.radioButton.isChecked():
+            Rname = "匿名"
+        sql = "insert into evidence(Sname,Rname,Record,PID) values('%s','%s','%s','%s')" % (names[jubaoIndex][1],Rname,self.content.toPlainText(),names[jubaoIndex][0])
+        try:
+            cursor.execute(sql)
+        except Exception as e:
+            print(e)
+        db_jubao.commit()
+        db_jubao.close()
+        reply = QtWidgets.QMessageBox.information(self,"成功","信息录入成功",QtWidgets.QMessageBox.Yes)
+        self.close()
 
 class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
     def __init__(self):
@@ -59,19 +77,12 @@ class mapWidget(QtWidgets.QWidget,Ui_Map):
     def __init__(self):
         super(mapWidget,self).__init__()
         self.setupUi(self)
-        global selected
-        db_map = pymysql.connect("localhost","root","crab1996","suspect",0,None,"utf8")
-        cursor = db_map.cursor()
-        sql = "select * from suspect_position where PID = %s" % (selected)
-        cursor.execute(sql)
-        suspectNow = cursor.fetchone()
-        global longitude,latitude
+        global longitude,latitude,index
+        suspectNow = names[index]
         longitude = suspectNow[2]
         latitude = suspectNow[3]
         self.label_2.setText(str(suspectNow[2]))
         self.label_4.setText(str(suspectNow[3]))
-        db_map.commit()
-        db_map.close()
     def back(self):
         self.close()
 
@@ -108,10 +119,10 @@ if __name__ == '__main__':
     db.commit()
     db.close()
 
-    selected = "0001"
-    index = 0
+    index = 0 #XYR界面选中的嫌疑人
     longitude = 0.0
     latitude = 0.0
+    jubaoIndex = 0 #举报界面选中的嫌疑人
 
     app = QtWidgets.QApplication(sys.argv)
     window = mywindow()
