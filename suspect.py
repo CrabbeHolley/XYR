@@ -60,6 +60,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         self.backButton.clicked.connect(self.back)
+        self.sureButton.clicked.connect(self.sure)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

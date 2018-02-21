@@ -6,7 +6,7 @@ from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
-from PyQt5 import QtWidgets,QtCore,QtGui;
+from PyQt5 import QtWidgets,QtCore;
 from tornado.options import define, options;
 
 define("port", default=8000, help="run on the given port", type=int)
@@ -56,6 +56,16 @@ class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
         Rname = self.Rname.text()
         if self.radioButton.isChecked():
             Rname = "匿名"
+        if Rname=="":
+            QtWidgets.QMessageBox.warning(self,"提示","请填入举报人姓名或选择匿名举报")
+            db_jubao.commit()
+            db_jubao.close()
+            return
+        if self.content.toPlainText()=="":
+            QtWidgets.QMessageBox.warning(self, "提示", "请填入举报行为")
+            db_jubao.commit()
+            db_jubao.close()
+            return
         sql = "insert into evidence(Sname,Rname,Record,PID) values('%s','%s','%s','%s')" % (names[jubaoIndex][1],Rname,self.content.toPlainText(),names[jubaoIndex][0])
         try:
             cursor.execute(sql)
@@ -63,14 +73,38 @@ class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
             print(e)
         db_jubao.commit()
         db_jubao.close()
-        reply = QtWidgets.QMessageBox.information(self,"成功","信息录入成功",QtWidgets.QMessageBox.Yes)
+        QtWidgets.QMessageBox.information(self,"成功","信息录入成功",QtWidgets.QMessageBox.Yes)
         self.close()
 
 class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
     def __init__(self):
         super(suspectWidget,self).__init__()
         self.setupUi(self)
+        now = QtCore.QDate.currentDate()
+        self.dateEdit.setDate(now)
+        self.dateEdit.setMaximumDate(now)
     def back(self):
+        self.close()
+    def sure(self):
+        db_suspect = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
+        cursor = db_suspect.cursor()
+        Sname = self.name.text()
+        id = self.idEdit.text()
+        date = self.dateEdit.text()
+        print(date)
+        if Sname=="" or id=="":
+            QtWidgets.QMessageBox.warning(self,"提示","请填写全部信息")
+            db_suspect.commit()
+            db_suspect.close()
+            return
+        sql = "insert into suspect_position(PID,name,outTime) values('%s','%s','%s')" % (id,Sname,date)
+        try:
+            cursor.execute(sql)
+        except Exception as e:
+            print(e)
+        db_suspect.commit()
+        db_suspect.close()
+        QtWidgets.QMessageBox.information(self, "成功", "信息录入成功", QtWidgets.QMessageBox.Yes)
         self.close()
 
 class mapWidget(QtWidgets.QWidget,Ui_Map):
