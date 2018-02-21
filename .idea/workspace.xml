@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3552af83-6337-418c-a080-2c18547be959" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/suspect.py" afterPath="$PROJECT_DIR$/suspect.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -486,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519119747158</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="增加嫌疑人 half">
+      <created>1519205428813</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1519205428813</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -528,7 +533,8 @@
     <MESSAGE value="map add" />
     <MESSAGE value="map done" />
     <MESSAGE value="举报嫌疑人行为 down" />
-    <option name="LAST_COMMIT_MESSAGE" value="举报嫌疑人行为 down" />
+    <MESSAGE value="增加嫌疑人 half" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加嫌疑人 half" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
