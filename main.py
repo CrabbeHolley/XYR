@@ -1,5 +1,6 @@
 import sys;
 import pymysql;
+import random;
 import threading;
 import tornado.web;
 from XYR import Ui_MainWindow;
@@ -91,7 +92,6 @@ class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
         Sname = self.name.text()
         id = self.idEdit.text()
         date = self.dateEdit.text()
-        print(date)
         if Sname=="" or id=="":
             QtWidgets.QMessageBox.warning(self,"提示","请填写全部信息")
             db_suspect.commit()
@@ -102,10 +102,10 @@ class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
             cursor.execute(sql)
         except Exception as e:
             print(e)
-        db_suspect.commit()
-        db_suspect.close()
         QtWidgets.QMessageBox.information(self, "成功", "信息录入成功", QtWidgets.QMessageBox.Yes)
         self.close()
+        db_suspect.commit()
+        db_suspect.close()
 
 class mapWidget(QtWidgets.QWidget,Ui_Map):
     def __init__(self):
@@ -148,6 +148,14 @@ if __name__ == '__main__':
     threadTronado.start()
     db = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
     cursor = db.cursor()
+    cursor.execute("select * from suspect_position")
+    names = cursor.fetchall()
+    for s in names:
+        long = random.uniform(75,130)
+        la = random.uniform(10,50)
+        sql = "update suspect_position set longitude='%f',latitude='%f' where PID='%s'" % (long,la,s[0])
+        cursor.execute(sql)
+    db.commit()
     cursor.execute("select * from suspect_position")
     names = cursor.fetchall()
     db.commit()
