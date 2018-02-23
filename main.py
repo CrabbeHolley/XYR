@@ -16,8 +16,10 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
         super(mywindow,self).__init__()
         self.setupUi(self)
+        global index
         for row in names:
             self.comboBox.addItem(row[1])
+        self.comboBox.setCurrentIndex(index)
     def action_in(self):
         self.addSuspectAction = jubaoWidget()
         self.addSuspectAction.show()
@@ -103,9 +105,18 @@ class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
         except Exception as e:
             print(e)
         QtWidgets.QMessageBox.information(self, "成功", "信息录入成功", QtWidgets.QMessageBox.Yes)
-        self.close()
         db_suspect.commit()
         db_suspect.close()
+        self.close()
+    def closeEvent(self, QCloseEvent):
+        global window,names
+        window.close()
+        db_close = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
+        cursor = db_close.cursor()
+        cursor.execute("select * from suspect_position")
+        names = cursor.fetchall()
+        window = mywindow()
+        window.show()
 
 class mapWidget(QtWidgets.QWidget,Ui_Map):
     def __init__(self):
