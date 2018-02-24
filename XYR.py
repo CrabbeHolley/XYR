@@ -66,10 +66,9 @@ class Ui_MainWindow(object):
         self.positionButton.setObjectName("positionButton")
         self.horizontalLayout.addWidget(self.positionButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setLineWidth(1)
-        self.tableView.setObjectName("tableView")
-        self.verticalLayout.addWidget(self.tableView)
+        self.table = QtWidgets.QTableWidget()
+        self.table.setObjectName("table")
+        self.verticalLayout.addWidget(self.table)
         self.suspectIn = QtWidgets.QPushButton(self.centralwidget)
         self.suspectIn.setObjectName("suspectIn")
         self.verticalLayout.addWidget(self.suspectIn)
@@ -85,6 +84,7 @@ class Ui_MainWindow(object):
         self.suspectIn.clicked.connect(self.suspect_in)
         self.positionButton.clicked.connect(self.map_find)
         self.comboBox.currentIndexChanged.connect(self.combobox_change)
+        self.actionButon.clicked.connect(self.find_action)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

@@ -7,7 +7,7 @@ from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
-from PyQt5 import QtWidgets,QtCore;
+from PyQt5 import QtWidgets,QtCore,QtGui;
 from tornado.options import define, options;
 
 define("port", default=8000, help="run on the given port", type=int)
@@ -32,6 +32,29 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def combobox_change(self):
         global index
         index = self.comboBox.currentIndex()
+    def find_action(self):
+        global index
+        db_find = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
+        cursor = db_find.cursor()
+        selected = names[index]
+        sql = "select * from evidence where PID='%s'" % (selected[0])
+        try:
+            cursor.execute(sql)
+        except Exception as e:
+            print(e)
+        rows = cursor.fetchall()
+        count = cursor.rowcount
+        self.table.setRowCount(count)
+        self.table.setColumnCount(2)
+        self.table.setColumnWidth(1, 630)
+        self.table.setHorizontalHeaderLabels(['姓名', '笔录'])
+        now = 0
+        for row in rows:
+            newItem = QtWidgets.QTableWidgetItem(row[2])
+            self.table.setItem(now, 0, newItem)
+            newItem = QtWidgets.QTableWidgetItem(row[3])
+            self.table.setItem(now, 1, newItem)
+            now = now+1
 
 class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
     def __init__(self):
