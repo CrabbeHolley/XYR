@@ -8,6 +8,7 @@ from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
 from guiji import Ui_Form as Ui_Guiji;
+from selected import Ui_Form as Ui_Select;
 from PyQt5 import QtWidgets,QtCore,QtGui;
 from tornado.options import define, options;
 
@@ -17,10 +18,10 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
         super(mywindow,self).__init__()
         self.setupUi(self)
-        global index
-        for row in names:
-            self.comboBox.addItem(row[1])
-        self.comboBox.setCurrentIndex(index)
+        #global index
+        #for row in names:
+        #    self.comboBox.addItem(row[1])
+        #self.comboBox.setCurrentIndex(index)
     def action_in(self):
         self.addSuspectAction = jubaoWidget()
         self.addSuspectAction.show()
@@ -33,9 +34,12 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def guiji_find(self):
         self.findGuiji = guijiWidget()
         self.findGuiji.show()
-    def combobox_change(self):
-        global index
-        index = self.comboBox.currentIndex()
+    #def combobox_change(self):
+    #    global index
+    #    index = self.comboBox.currentIndex()
+    def suspect_select(self):
+        self.suspectSelect = selectWidget()
+        self.suspectSelect.show()
     def find_action(self):
         global index
         db_find = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
@@ -59,6 +63,44 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
             newItem = QtWidgets.QTableWidgetItem(row[3])
             self.table.setItem(now, 1, newItem)
             now = now+1
+        self.table.resizeRowsToContents()
+
+class selectWidget(QtWidgets.QWidget,Ui_Select):
+    def __init__(self):
+        super(selectWidget,self).__init__()
+        self.setupUi(self)
+    def search_suspect(self):
+        db_search = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
+        cursor = db_search.cursor()
+        searchName = self.lineEdit.text()
+        sql = "select * from people WHERE name='%s'" % searchName;
+        try:
+            cursor.execute(sql)
+        except Exception as e:
+            print(e)
+        rows = cursor.fetchall()
+        count = cursor.rowcount
+        self.tableWidget.setRowCount(count)
+        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setHorizontalHeaderLabels(['身份证号码','姓名','性别','现住址','户籍所在地'])
+        self.tableWidget.setColumnWidth(0,200)
+        self.tableWidget.setColumnWidth(3, 150)
+        self.tableWidget.setColumnWidth(4, 170)
+        now = 0;
+        for row in rows:
+            newItem = QtWidgets.QTableWidgetItem(row[0])
+            self.tableWidget.setItem(now, 0 ,newItem)
+            newItem = QtWidgets.QTableWidgetItem(row[1])
+            self.tableWidget.setItem(now, 1, newItem)
+            newItem = QtWidgets.QTableWidgetItem(row[2])
+            self.tableWidget.setItem(now, 2, newItem)
+            newItem = QtWidgets.QTableWidgetItem(row[3])
+            self.tableWidget.setItem(now, 3, newItem)
+            newItem = QtWidgets.QTableWidgetItem(row[4])
+            self.tableWidget.setItem(now, 4, newItem)
+            now = now+1
+        self.tableWidget.resizeRowsToContents()
+        db_search.close()
 
 class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
     def __init__(self):
@@ -152,6 +194,7 @@ class mapWidget(QtWidgets.QWidget,Ui_Map):
         self.label_4.setText(str(suspectNow[3]))
     def back(self):
         self.close()
+        window.orbitButton.setText("guiji")
 
 class guijiWidget(QtWidgets.QWidget,Ui_Guiji):
     def __init__(self):
