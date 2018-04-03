@@ -7,6 +7,7 @@ from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
+from guiji import Ui_Form as Ui_Guiji;
 from PyQt5 import QtWidgets,QtCore,QtGui;
 from tornado.options import define, options;
 
@@ -29,6 +30,9 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def map_find(self):
         self.findMap = mapWidget()
         self.findMap.show()
+    def guiji_find(self):
+        self.findGuiji = guijiWidget()
+        self.findGuiji.show()
     def combobox_change(self):
         global index
         index = self.comboBox.currentIndex()
@@ -84,13 +88,9 @@ class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
             Rname = "匿名"
         if Rname=="":
             QtWidgets.QMessageBox.warning(self,"提示","请填入举报人姓名或选择匿名举报")
-            db_jubao.commit()
-            db_jubao.close()
             return
         if self.content.toPlainText()=="":
             QtWidgets.QMessageBox.warning(self, "提示", "请填入举报行为")
-            db_jubao.commit()
-            db_jubao.close()
             return
         sql = "insert into evidence(Sname,Rname,Record,PID) values('%s','%s','%s','%s')" % (names[jubaoIndex][1],Rname,self.content.toPlainText(),names[jubaoIndex][0])
         try:
@@ -119,8 +119,6 @@ class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
         date = self.dateEdit.text()
         if Sname=="" or id=="":
             QtWidgets.QMessageBox.warning(self,"提示","请填写全部信息")
-            db_suspect.commit()
-            db_suspect.close()
             return
         sql = "insert into suspect_position(PID,name,outTime) values('%s','%s','%s')" % (id,Sname,date)
         try:
@@ -145,12 +143,25 @@ class mapWidget(QtWidgets.QWidget,Ui_Map):
     def __init__(self):
         super(mapWidget,self).__init__()
         self.setupUi(self)
-        global longitude,latitude,index
+        global longitude,latitude,index,guiji
+        guiji = False
         suspectNow = names[index]
         longitude = suspectNow[2]
         latitude = suspectNow[3]
         self.label_2.setText(str(suspectNow[2]))
         self.label_4.setText(str(suspectNow[3]))
+    def back(self):
+        self.close()
+
+class guijiWidget(QtWidgets.QWidget,Ui_Guiji):
+    def __init__(self):
+        super(guijiWidget,self).__init__()
+        self.setupUi(self)
+        global longitude,latitude,index,guiji
+        guiji = True
+        suspectNow = names[index]
+        longitude = suspectNow[2]
+        latitude = suspectNow[3]
     def back(self):
         self.close()
 
@@ -160,8 +171,10 @@ class IndexHandler(tornado.web.RequestHandler):
 
 class PoemPageHandler(tornado.web.RequestHandler):
     def post(self):
-        global longitude,latitude
-        self.render('map.html', noun1=longitude, noun2=latitude)
+        global longitude,latitude,guiji
+        startLong = longitude+random.uniform(-1.5,1.5)
+        startLa = latitude+random.uniform(-1,1)
+        self.render('map.html', noun1=longitude, noun2=latitude, noun3=startLong, noun4=startLa, noun5=guiji)
 
 class myThread(threading.Thread):
     def __init__(self, threadID, name):
@@ -178,6 +191,7 @@ class myThread(threading.Thread):
         tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == '__main__':
+    guiji = False
     threadTronado = myThread(1, "threadTornado")
     threadTronado.start()
     db = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
@@ -185,8 +199,8 @@ if __name__ == '__main__':
     cursor.execute("select * from suspect_position")
     names = cursor.fetchall()
     for s in names:
-        long = random.uniform(75,130)
-        la = random.uniform(10,50)
+        long = random.uniform(113,122)
+        la = random.uniform(22,40)
         sql = "update suspect_position set longitude='%f',latitude='%f' where PID='%s'" % (long,la,s[0])
         cursor.execute(sql)
     db.commit()

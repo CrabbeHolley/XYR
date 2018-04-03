@@ -65,6 +65,9 @@ class Ui_MainWindow(object):
         self.positionButton = QtWidgets.QPushButton(self.centralwidget)
         self.positionButton.setObjectName("positionButton")
         self.horizontalLayout.addWidget(self.positionButton)
+        self.orbitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.orbitButton.setObjectName("orbitButton")
+        self.horizontalLayout.addWidget(self.orbitButton)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.table = QtWidgets.QTableWidget()
         self.table.setObjectName("table")
@@ -85,6 +88,7 @@ class Ui_MainWindow(object):
         self.positionButton.clicked.connect(self.map_find)
         self.comboBox.currentIndexChanged.connect(self.combobox_change)
         self.actionButon.clicked.connect(self.find_action)
+        self.orbitButton.clicked.connect(self.guiji_find)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -95,5 +99,6 @@ class Ui_MainWindow(object):
         self.actionButon.setText(_translate("MainWindow", "最近行为查询"))
         self.actionIn.setText(_translate("MainWindow", "最近行为录入"))
         self.positionButton.setText(_translate("MainWindow", "实时位置查询"))
+        self.orbitButton.setText(_translate("MainWindow", "7天行动轨迹查询"))
         self.suspectIn.setText(_translate("MainWindow", "嫌疑人信息录入"))
 

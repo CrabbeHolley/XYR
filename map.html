@@ -15,6 +15,9 @@
 	<form id="r-result" action="/map" method="post" style="display: none">
 		经度: <input id="longitude" name="longitude" type="text" style="width:100px; margin-right:10px;" value="{{noun1}}" />
 		纬度: <input id="latitude" name="latitude" type="text" style="width:100px; margin-right:10px;" value="{{noun2}}" />
+		经度start：<input id="longitudeStart" type="text" style="width: 100px; margin-right: 10px;" value="{{noun3}}">
+        纬度start：<input id="latitudeStart" type="text" style="width: 100px; margin-right: 10px;" value="{{noun4}}">
+        是否显示轨迹：<input id="guiji" type="text" style="width: 100px; margin-right: 10px;" value="{{noun5}}">
 		<input type="submit" value="查询"/>
 	</form>
 </body>
@@ -24,11 +27,19 @@
 	var map = new BMap.Map("allmap");
 	map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
 	map.enableScrollWheelZoom(true);
-    if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
+	var walking = new BMap.WalkingRoute(map, {
+    renderOptions: {
+        map: map,
+        autoViewport: true
+    }
+});
+    if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != "" && document.getElementById("longitudeStart").value != "" && document.getElementById("latitudeStart").value != ""){
         map.clearOverlays();
         var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
+        var start_point = new BMap.Point(document.getElementById("longitudeStart").value,document.getElementById("latitudeStart").value);
         var marker = new BMap.Marker(new_point);  // 创建标注
-        map.addOverlay(marker);              // 将标注添加到地图中
+        if (document.getElementById("guiji").value == "True") walking.search(start_point, new_point);
+        else map.addOverlay(marker);              // 将标注添加到地图中
         map.panTo(new_point);
     }
 </script>
