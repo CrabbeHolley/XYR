@@ -52,6 +52,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         self.pushButton.clicked.connect(self.search_suspect)
+        self.pushButton_2.clicked.connect(self.sure)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):

@@ -101,6 +101,24 @@ class selectWidget(QtWidgets.QWidget,Ui_Select):
             now = now+1
         self.tableWidget.resizeRowsToContents()
         db_search.close()
+    def sure(self):
+        sel = self.tableWidget.currentRow()
+        peopleId = self.tableWidget.item(sel,0)
+        hasSuspect = False
+        global index,names
+        now = 0
+        for name in names:
+            if name[5]==peopleId.text():
+                hasSuspect = True
+                index = now
+                window.suspectButton.setText(name[1])
+            now = now+1
+        if hasSuspect==False:
+            QtWidgets.QMessageBox.warning(self, "提示", "选定人没有犯案记录！")
+            return
+        self.close()
+
+
 
 class jubaoWidget(QtWidgets.QDialog,Ui_Jubao):
     def __init__(self):
@@ -172,14 +190,11 @@ class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
         db_suspect.close()
         self.close()
     def closeEvent(self, QCloseEvent):
-        global window,names
-        window.close()
+        global names
         db_close = pymysql.connect("localhost", "root", "crab1996", "suspect", 0, None, "utf8")
         cursor = db_close.cursor()
         cursor.execute("select * from suspect_position")
         names = cursor.fetchall()
-        window = mywindow()
-        window.show()
 
 class mapWidget(QtWidgets.QWidget,Ui_Map):
     def __init__(self):
