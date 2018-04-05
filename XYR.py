@@ -83,6 +83,9 @@ class Ui_MainWindow(object):
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("myICON.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
 
         self.retranslateUi(MainWindow)
         self.actionIn.clicked.connect(self.action_in)
@@ -95,7 +98,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "嫌疑人行为轨迹可视化系统"))
         self.title.setText(_translate("MainWindow", "嫌疑人行为轨迹可视化系统"))
         self.name.setText(_translate("MainWindow", "嫌疑人姓名："))
         self.actionButon.setText(_translate("MainWindow", "最近行为查询"))
