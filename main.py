@@ -9,7 +9,7 @@ from suspect import Ui_Dialog as Ui_Suspect;
 from map import Ui_Form as Ui_Map;
 from guiji import Ui_Form as Ui_Guiji;
 from selected import Ui_Form as Ui_Select;
-from PyQt5 import QtWidgets,QtCore,QtGui;
+from PyQt5 import QtWidgets,QtCore;
 from tornado.options import define, options;
 
 define("port", default=8000, help="run on the given port", type=int)
@@ -18,10 +18,6 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
         super(mywindow,self).__init__()
         self.setupUi(self)
-        #global index
-        #for row in names:
-        #    self.comboBox.addItem(row[1])
-        #self.comboBox.setCurrentIndex(index)
     def action_in(self):
         self.addSuspectAction = jubaoWidget()
         self.addSuspectAction.show()
@@ -34,9 +30,6 @@ class mywindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def guiji_find(self):
         self.findGuiji = guijiWidget()
         self.findGuiji.show()
-    #def combobox_change(self):
-    #    global index
-    #    index = self.comboBox.currentIndex()
     def suspect_select(self):
         self.suspectSelect = selectWidget()
         self.suspectSelect.show()
