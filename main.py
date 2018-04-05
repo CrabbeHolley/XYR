@@ -177,10 +177,19 @@ class suspectWidget(QtWidgets.QDialog,Ui_Suspect):
         Sname = self.name.text()
         id = self.idEdit.text()
         date = self.dateEdit.text()
-        if Sname=="" or id=="":
+        PID = self.PIDEdit.text()
+        if Sname=="" or id=="" or PID=="":
             QtWidgets.QMessageBox.warning(self,"提示","请填写全部信息")
             return
-        sql = "insert into suspect_position(PID,name,outTime) values('%s','%s','%s')" % (id,Sname,date)
+        sql = "select * from people where PeopleID='%s' and name='%s'" % (PID,Sname)
+        try:
+            cursor.execute(sql)
+        except Exception as e:
+            print(e)
+        if cursor.rowcount<=0:
+            QtWidgets.QMessageBox.warning(self, "提示", "请输入正确的身份证号")
+            return
+        sql = "insert into suspect_position(PID,name,outTime,PeopleID) values('%s','%s','%s','%s')" % (id,Sname,date,PID)
         try:
             cursor.execute(sql)
         except Exception as e:
@@ -209,7 +218,6 @@ class mapWidget(QtWidgets.QWidget,Ui_Map):
         self.label_4.setText(str(suspectNow[3]))
     def back(self):
         self.close()
-        window.orbitButton.setText("guiji")
 
 class guijiWidget(QtWidgets.QWidget,Ui_Guiji):
     def __init__(self):
