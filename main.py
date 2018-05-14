@@ -96,6 +96,9 @@ class selectWidget(QtWidgets.QWidget,Ui_Select):
         db_search.close()
     def sure(self):
         sel = self.tableWidget.currentRow()
+        if sel==-1:
+            self.close()
+            return
         peopleId = self.tableWidget.item(sel,0)
         hasSuspect = False
         global index,names
