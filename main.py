@@ -1,11 +1,8 @@
 import sys;
-import json;
 import pymysql;
 import random;
 import threading;
 import tornado.web;
-import urllib;
-import urllib.request;
 from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
@@ -249,15 +246,6 @@ class guijiWidget(QtWidgets.QWidget,Ui_Guiji):
             latitude = 38.9968 #天津港客运站
             guijiInformation = "嫌疑人从天津南站，最后到达了天津港客运站"
         self.information.setPlainText(guijiInformation)
-        # url = "http://api.map.baidu.com/geocoder/v2/?renderReverse&location=" + \
-        #       str(startLong) + "," + str(startLa) + \
-        #       "&output=json&pois=1&ak=nYGkVf0GCll0lWgwMIWWas9VI2Ec81bN"
-        # startReq = urllib.request.Request(url)
-        # startDate = urllib.request.urlopen(startReq)
-        # startJson = startDate.read()
-        # startStr = startJson.decode()
-        # start = json.loads(startStr)
-        # print(start)
     def back(self):
         self.close()
 
