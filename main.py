@@ -1,8 +1,11 @@
 import sys;
+import json;
 import pymysql;
 import random;
 import threading;
 import tornado.web;
+import urllib;
+import urllib.request;
 from XYR import Ui_MainWindow;
 from jubao import Ui_Dialog as Ui_Jubao;
 from suspect import Ui_Dialog as Ui_Suspect;
@@ -210,8 +213,14 @@ class mapWidget(QtWidgets.QWidget,Ui_Map):
         suspectNow = names[index]
         longitude = suspectNow[2]
         latitude = suspectNow[3]
-        self.label_2.setText(str(suspectNow[2]))
-        self.label_4.setText(str(suspectNow[3]))
+        if index==0:
+            longitude = 116.5101
+            latitude = 39.6915 #青云里小区
+        elif index==1:
+            longitude = 117.7414
+            latitude = 38.9968 #天津港客运站
+        self.label_2.setText(str(longitude))
+        self.label_4.setText(str(latitude))
     def back(self):
         self.close()
 
@@ -219,11 +228,36 @@ class guijiWidget(QtWidgets.QWidget,Ui_Guiji):
     def __init__(self):
         super(guijiWidget,self).__init__()
         self.setupUi(self)
-        global longitude,latitude,index,guiji
+        global longitude,latitude,index,guiji,startLong,startLa
         guiji = True
         suspectNow = names[index]
         longitude = suspectNow[2]
         latitude = suspectNow[3]
+        startLong = longitude + random.uniform(-1.5, 1.5)
+        startLa = latitude + random.uniform(-1, 1)
+        guijiInformation = ""
+        if index==0:
+            startLong = 116.3851
+            startLa = 39.8709 #北京南站
+            longitude = 116.5101
+            latitude = 39.6915 #青云里小区
+            guijiInformation = "嫌疑人从北京南站，最后到达了青云里小区"
+        elif index==1:
+            startLong = 117.0688
+            startLa = 39.0627 #天津南站
+            longitude = 117.7414
+            latitude = 38.9968 #天津港客运站
+            guijiInformation = "嫌疑人从天津南站，最后到达了天津港客运站"
+        self.information.setPlainText(guijiInformation)
+        # url = "http://api.map.baidu.com/geocoder/v2/?renderReverse&location=" + \
+        #       str(startLong) + "," + str(startLa) + \
+        #       "&output=json&pois=1&ak=nYGkVf0GCll0lWgwMIWWas9VI2Ec81bN"
+        # startReq = urllib.request.Request(url)
+        # startDate = urllib.request.urlopen(startReq)
+        # startJson = startDate.read()
+        # startStr = startJson.decode()
+        # start = json.loads(startStr)
+        # print(start)
     def back(self):
         self.close()
 
@@ -233,9 +267,7 @@ class IndexHandler(tornado.web.RequestHandler):
 
 class PoemPageHandler(tornado.web.RequestHandler):
     def post(self):
-        global longitude,latitude,guiji
-        startLong = longitude+random.uniform(-1.5,1.5)
-        startLa = latitude+random.uniform(-1,1)
+        global longitude,latitude,guiji,startLa,startLong
         self.render('map.html', noun1=longitude, noun2=latitude, noun3=startLong, noun4=startLa, noun5=guiji)
 
 class myThread(threading.Thread):
@@ -274,7 +306,10 @@ if __name__ == '__main__':
     index = 0 #XYR界面选中的嫌疑人
     longitude = 0.0
     latitude = 0.0
+    startLong = 0.0
+    startLa = 0.0
     jubaoIndex = 0 #举报界面选中的嫌疑人
+    guijiInformation = ""
 
     app = QtWidgets.QApplication(sys.argv)
     window = mywindow()
